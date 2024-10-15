@@ -19,6 +19,10 @@ class Game
     track_winner
   end
 
+  def display
+    puts board
+  end
+
   # Method for winner tracking
   def track_winner
     check_rows
