@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'player'
+
 # Main class for a Tic-tac-toe game
 class Game
   attr_accessor :board
