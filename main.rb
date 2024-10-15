@@ -2,4 +2,11 @@
 
 require_relative 'lib/game'
 
-game = Game.new
+# Create a game with 3 x 3 board size
+game = Game.new(3)
+
+winner = nil
+
+unless winner
+  # to do
+end

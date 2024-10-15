@@ -6,15 +6,15 @@ require_relative 'player'
 class Game
   attr_accessor :board
 
-  def initialize
-    @board = Array.new(3) { Array.new(3) } # new array per row instead of reference
+  def initialize(side)
+    @board = Array.new(side) { Array.new(side) } # new array per row instead of reference
     @player_x = Player.new('X')
     @player_o = Player.new('0')
     @winner = nil
   end
 
   # Method for marking a cell by a player
-  def register_turn(player, cell)
+  def register_move(player, cell)
     board[cell] = player.name
     track_winner
   end
