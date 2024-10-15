@@ -6,10 +6,10 @@ require_relative 'player'
 class Game
   attr_accessor :board
 
-  def initialize(side)
+  def initialize(side, player1, player2)
     @board = Array.new(side) { Array.new(side) } # new array per row instead of reference
-    @player_x = Player.new('X')
-    @player_o = Player.new('0')
+    @player_x = player1
+    @player_o = player2
     @winner = nil
   end
 
