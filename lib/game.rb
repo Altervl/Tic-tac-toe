@@ -2,8 +2,6 @@
 
 # Main class for a Tic-tac-toe game
 class Game
-  attr_accessor :board
-
   def initialize(side, player1, player2)
     @board = Array.new(side) { Array.new(side, ' ') } # new array per row instead of reference
     @player_x = player1
@@ -23,7 +21,7 @@ class Game
   def display
     board.each_with_index do |row, index|
       # Print delimeter only after first and second rows
-      puts '— + — + —' if index.positive?
+      puts '—   —   —' if index.positive?
       puts row.join(' | ')
     end
   end
@@ -40,6 +38,8 @@ class Game
   end
 
   private
+
+  attr_accessor :board
 
   def check_rows
     board.each do |row|
