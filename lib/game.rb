@@ -20,7 +20,9 @@ class Game
   end
 
   def display
-    puts board
+    a.each do |i| 
+      puts '— + — + —'
+      puts i.join(" | ")
   end
 
   # Method for winner tracking
