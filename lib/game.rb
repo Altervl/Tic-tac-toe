@@ -30,6 +30,8 @@ class Game
 
   # Method for winner tracking
   def track_winner
+    return 'Draw' unless board.flatten.include? ' '
+
     r = check_rows
     c = check_cols
     d = check_diagonals

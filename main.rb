@@ -23,9 +23,12 @@ loop do
 
   game.display
 
-  winner = game.track_winner
-  if winner
-    p "#{winner} wins"
+  result = game.track_winner
+  if result == 'Draw'
+    puts result
+    break
+  elsif result == 'X'
+    puts 'Player 1 (X) wins'
     break
   end
 
@@ -37,9 +40,12 @@ loop do
 
   game.display
 
-  winner = game.track_winner
-  if winner
-    p "#{winner} wins"
+  result = game.track_winner
+  if result == 'Draw'
+    puts result
+    break
+  elsif result == 'O'
+    puts 'Player 2 (O) wins'
     break
   end
 
