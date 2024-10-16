@@ -9,11 +9,7 @@ class Player
   end
 
   def make_a_move
-    move = nil
-    until move.is_a?(Integer) && (1..9).include?(move)
-      puts 'Make your move (enter a number 1-9):'
-      gets.chomp.to_i
-    end
-    move
+    puts 'Make your move (enter a couple of digits (1-3) separated by a space):'
+    gets.chomp
   end
 end
