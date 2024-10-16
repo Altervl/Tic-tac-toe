@@ -7,20 +7,15 @@ require_relative 'lib/player'
 player1 = Player.new('X')
 player2 = Player.new('O')
 game = Game.new(3, player1, player2)
-
 round = 1
+
+# Game loop
 loop do
-  puts '--------------'
-  puts "Round #{round}"
-  puts '--------------'
+  puts "--------------\nRound #{round}\n--------------"
   game.display
 
-  puts '--------------'
-  puts 'Player 1'
-  puts '--------------'
-  move1 = player1.make_a_move
-  game.register_move(player1, move1)
-
+  puts "--------------\nPlayer 1\n--------------"
+  game.register_move(player1, player1.make_a_move)
   game.display
 
   result = game.track_winner
@@ -32,12 +27,8 @@ loop do
     break
   end
 
-  puts '--------------'
-  puts 'Player 2'
-  puts '--------------'
-  move2 = player2.make_a_move
-  game.register_move(player2, move2)
-
+  puts "--------------\nPlayer 2\n--------------"
+  game.register_move(player2, player2.make_a_move)
   game.display
 
   result = game.track_winner
