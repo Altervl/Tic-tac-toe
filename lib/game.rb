@@ -11,10 +11,11 @@ class Game
 
   # Method for marking a cell by a player
   def register_move(player, move)
-    r, c = move.split(' ').map { |i| i.to_i - 1 }
-    return 'Error. The cell is marked already.' unless board[r][c] == ' '
+    row = move / board.size
+    col = move % board.size
+    return 'Error. The cell is marked already.' unless board[row][col] == ' '
 
-    board[r][c] = player.name
+    board[row][col] = player.name
   end
 
   # Method for displaying state of the game
