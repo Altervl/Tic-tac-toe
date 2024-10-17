@@ -8,7 +8,6 @@ class Game
     @board = Array.new(side) { Array.new(side, ' ') } # new array per row instead of a reference
     @player_x = Player.new('X')
     @player_o = Player.new('O')
-    @winner = nil
   end
 
   # Game loop method
