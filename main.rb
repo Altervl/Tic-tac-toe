@@ -15,7 +15,12 @@ loop do
   game.display
 
   puts "--------------\nPlayer 1\n--------------"
-  game.register_move(player1, player1.make_a_move)
+  loop do
+    break unless game.register_move(player1, player1.make_a_move).include? 'Error'
+
+    puts 'Cell is occupied'
+  end
+
   game.display
 
   result = game.track_winner
@@ -28,7 +33,13 @@ loop do
   end
 
   puts "--------------\nPlayer 2\n--------------"
-  game.register_move(player2, player2.make_a_move)
+
+  loop do
+    break unless game.register_move(player2, player2.make_a_move).include? 'Error'
+
+    puts 'Cell is occupied'
+  end
+
   game.display
 
   result = game.track_winner
