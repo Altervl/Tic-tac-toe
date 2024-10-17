@@ -10,6 +10,13 @@ class Player
 
   def make_a_move
     puts 'Make your move (enter a digit 1-9):'
-    gets.chomp.to_i - 1 # get index for gameboard array
+
+    loop do
+      input = gets.chomp.to_i
+
+      break input - 1 if input.is_a?(Integer) && (1..9).include?(input)
+
+      puts "Player #{name}: wrong input"
+    end
   end
 end

@@ -1,25 +1,45 @@
 # frozen_string_literal: true
 
+require_relative 'player'
+
 # Main class for a Tic-tac-toe game
 class Game
-  def initialize(side, player1, player2)
-    @board = Array.new(side) { Array.new(side, ' ') } # new array per row instead of reference
-    @player_x = player1
-    @player_o = player2
+  def initialize(side)
+    @board = Array.new(side) { Array.new(side, ' ') } # new array per row instead of a reference
+    @player_x = Player.new('X')
+    @player_o = Player.new('O')
     @winner = nil
   end
 
-  # Method for marking a cell by a player
-  def register_move(player, move)
-    row = move / board.size
-    col = move % board.size
-    return 'Error. The cell is marked already.' unless board[row][col] == ' '
+  # Game loop method
+  def play
+    round = 1
 
-    board[row][col] = player.name
+    loop do
+      puts "-------\nRound #{round}\n-------"
+      display_board
+
+      puts "\nPlayer #{player_x.name}\n"
+      ask_for_move(player_x)
+      display_board
+      break if check_winner
+
+      puts "\nPlayer #{player_o.name}\n"
+      ask_for_move(player_o)
+      display_board
+      break if check_winner
+
+      round += 1
+    end
   end
 
+  private
+
+  attr_accessor :board
+  attr_reader :player_x, :player_o
+
   # Method for displaying state of the game
-  def display
+  def display_board
     board.each_with_index do |row, index|
       # Print delimeter only after first and second rows
       puts '—   —   —' if index.positive?
@@ -27,7 +47,34 @@ class Game
     end
   end
 
-  # Method for winner tracking
+  def ask_for_move(player)
+    loop do
+      break unless register_move(player, player.make_a_move).include? 'Error'
+
+      puts 'Cell is occupied'
+    end
+  end
+
+  # Method for marking a cell by a player
+  def register_move(player, move)
+    row = move / board.size
+    col = move % board.size
+    return 'Error' unless board[row][col] == ' '
+
+    board[row][col] = player.name
+  end
+
+  def check_winner
+    result = track_winner
+
+    puts result if result == 'Draw'
+    puts "Player #{result} wins" if %w[X O].include? result
+
+    result
+  end
+
+  # Winner tracking methods #
+
   def track_winner
     return 'Draw' unless board.flatten.include? ' '
 
@@ -35,12 +82,9 @@ class Game
     c = check_cols
     d = check_diagonals
 
+    # return the winner if there is one
     [r, c, d].find { |i| %w[X O].include?(i) }
   end
-
-  private
-
-  attr_accessor :board
 
   def check_rows
     board.each do |row|
