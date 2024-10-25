@@ -8,13 +8,11 @@ class Player
     @name = name
   end
 
-  def make_a_move
-    puts 'Make your move (enter a digit 1-9):'
-
+  def make_move(board_size)
     loop do
       input = gets.chomp.to_i
 
-      break input - 1 if input.is_a?(Integer) && (1..9).include?(input)
+      break input - 1 if input.is_a?(Integer) && (1..board_size).include?(input)
 
       puts "Player #{name}: wrong input"
     end

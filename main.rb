@@ -2,6 +2,6 @@
 
 require_relative 'lib/game'
 
-# Create a game with 3 x 3 board size and play it
+# Create a game with provided board size and play it
 game = Game.new(3)
 game.play

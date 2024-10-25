@@ -18,15 +18,15 @@ class Game
       puts "-------\nRound #{round}\n-------"
       display_board
 
-      puts "\nPlayer #{player_x.name}\n"
-      ask_for_move(player_x)
+      puts "Player #{player_x.name}"
+      ask_move(player_x)
       display_board
-      break if check_winner
+      break if winner?
 
-      puts "\nPlayer #{player_o.name}\n"
-      ask_for_move(player_o)
+      puts "Player #{player_o.name}"
+      ask_move(player_o)
       display_board
-      break if check_winner
+      break if winner?
 
       round += 1
     end
@@ -40,15 +40,18 @@ class Game
   # Method for displaying state of the game
   def display_board
     board.each_with_index do |row, index|
-      # Print delimeter only after first and second rows
-      puts '—   —   —' if index.positive?
+      # Set and print a delimeter only after first and second rows
+      delimeter = ('—   ' * board.size).chomp # remove trailing spaces
+      puts delimeter if index.positive?
       puts row.join(' | ')
     end
   end
 
-  def ask_for_move(player)
+  def ask_move(player)
+    puts "Make your move (enter a digit 1-#{board.size**2}):"
+
     loop do
-      break unless register_move(player, player.make_a_move).include? 'Error'
+      break unless register_move(player, player.make_move(board.flatten.size)).include? 'Error'
 
       puts 'Cell is occupied'
     end
@@ -63,7 +66,7 @@ class Game
     board[row][col] = player.name
   end
 
-  def check_winner
+  def winner?
     result = track_winner
 
     puts result if result == 'Draw'
